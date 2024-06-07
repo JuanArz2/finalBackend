@@ -5,6 +5,7 @@ import userModel from "../models/usersModel.js";
 const loginController = {
   login: async (sol, req) => {
     try {
+      // Destructuración desde objeto
       const { username, password } = sol.body;
       const foundUser = await userModel.findOne({
         email: username,
