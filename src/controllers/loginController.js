@@ -5,10 +5,9 @@ import userModel from "../models/usersModel.js";
 const loginController = {
   login: async (sol, req) => {
     try {
-      // Destructuración desde objeto
-      const { username, password } = sol.body;
+      const { email, password } = sol.body; // Destructuración objeto
       const foundUser = await userModel.findOne({
-        email: username,
+        email: email,
       });
       const validPassword = await bcryptjs.compare(
         password,
