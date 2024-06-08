@@ -21,7 +21,7 @@ const loginController = {
         req.json({
           state: "Successful",
           mesage: "Access allowed",
-          data: foundUser._id,
+          data: token,
         });
       } else {
         req.json({
