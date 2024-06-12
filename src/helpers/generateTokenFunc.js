@@ -11,3 +11,15 @@ export function generateToken(xPayload) {
     });
   });
 }
+
+export function verifyToken(token) {
+  return new Promise((res, rej) => {
+    jwt.verify(token, "secretKey", (error, decoded) => {
+      if (error) {
+        rej(error);
+      } else {
+        res(decoded);
+      }
+    });
+  });
+}

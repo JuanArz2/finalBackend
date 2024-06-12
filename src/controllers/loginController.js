@@ -1,6 +1,7 @@
 import bcryptjs from "bcryptjs";
-import { generateToken } from "../helpers/generateTokenFunc.js";
+import { generateToken, verifyToken } from "../helpers/generateTokenFunc.js";
 import userModel from "../models/usersModel.js";
+import { decode } from "jsonwebtoken";
 
 const loginController = {
   login: async (sol, req) => {
@@ -34,6 +35,33 @@ const loginController = {
       req.json({
         state: "Error",
         mesage: "Error login",
+        data: error,
+      });
+    }
+  },
+
+  tokenValidation: async (sol, req) => {
+    try {
+      const token = sol.params.token;
+      const decoded = await verifyToken(token);
+      console.log("DECODED: ", decoded);
+      if (decoded.id) {
+        req.json({
+          state: "Successful",
+          mesage: "Valid token",
+          data: decoded,
+        });
+      } else {
+        req.json({
+          state: "Error",
+          mesage: "Invalid token",
+          data: null,
+        });
+      }
+    } catch (error) {
+      req.json({
+        state: "Error",
+        mesage: "Error validating token",
         data: error,
       });
     }
