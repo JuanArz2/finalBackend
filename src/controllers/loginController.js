@@ -1,7 +1,7 @@
 import bcryptjs from "bcryptjs";
 import { generateToken, verifyToken } from "../helpers/generateTokenFunc.js";
 import userModel from "../models/usersModel.js";
-import { decode } from "jsonwebtoken";
+//import { decode } from "jsonwebtoken";
 
 const loginController = {
   login: async (sol, req) => {
