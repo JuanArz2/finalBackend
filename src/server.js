@@ -1,3 +1,4 @@
+import path from "path"; // Modulo de NOTE para enrutar los archivos, => L-17
 import express from "express";
 import cors from "cors";
 import morgan from "morgan";
@@ -13,6 +14,7 @@ server.use(morgan("dev"));
 server.use("/users", usersRouter);
 server.use("/login", loginRouter);
 server.use("/products", productsRouter);
+server.use("/images/products", express.static(path.resolve("images/products")));
 
 server.get("/", (sol, res) => {
   res.status(404).send("Not found, try /login on the URL");

@@ -8,7 +8,8 @@ const productSchema = new Schema(
       weight: { type: Number, required: true },
     },
     inStock: { type: Boolean, required: false },
-    image: { data: Buffer, contentType: String },
+    image: { type: String, required: true },
+    // image: { data: Buffer, contentType: String }, // estos son los datos que Multer crea para las img
   },
   { versionKey: false, timestamps: true } // Las opciones van después del objeto del esquema. Cancela la última llave-valor de la versión de Mongo; Deja registro de la hora de creación.
 );

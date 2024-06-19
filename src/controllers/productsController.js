@@ -1,4 +1,5 @@
 import multer from "multer";
+import fs from "fs-extra";
 import productsModel from "../models/productsModel.js";
 
 const productsController = {
@@ -29,10 +30,11 @@ const productsController = {
               weight: sol.body.weight,
             },
             inStock: sol.body.inStock,
-            image: {
+            image: sol.file.filename,
+            /* image: {
               data: sol.file.filename,
               contentType: "image/png",
-            },
+            }, */
           });
           console.log("NEW PRODUCT: ", newProduct);
           const createdProduct = await newProduct.save();
@@ -55,19 +57,14 @@ const productsController = {
   },
   readProduct: async (sol, req) => {
     try {
-      req.json({
-        state: "Success",
-        mesage: "Product found",
-        data: null,
-      });
-      /* const foundProduct = await productsModel.findById(sol.params.id);
+      const foundProduct = await productsModel.findById(sol.params.id);
       if (foundProduct._id) {
         req.json({
           state: "Success",
           mesage: "Product found",
           data: foundProduct,
         });
-      } */
+      }
     } catch (error) {
       req.json({
         state: "Error",
@@ -78,17 +75,12 @@ const productsController = {
   },
   readAllProducts: async (sol, req) => {
     try {
-      req.json({
-        state: "Success",
-        mesage: "Products found",
-        data: null,
-      });
-      /* const allProducts = await productsModel.find();
+      const allProducts = await productsModel.find();
       req.json({
         state: "Success",
         mesage: "Products found",
         data: allProducts,
-      }); */
+      });
     } catch (error) {
       req.json({
         state: "Error",
@@ -99,12 +91,7 @@ const productsController = {
   },
   updateProduct: async (sol, req) => {
     try {
-      req.json({
-        state: "Success",
-        mesage: "Product updated",
-        data: null,
-      });
-      /* const productUpdated = await productsModel.findByIdAndUpdate(
+      const productUpdated = await productsModel.findByIdAndUpdate(
         sol.params.id,
         sol.body
       );
@@ -114,7 +101,7 @@ const productsController = {
           mesage: "Product updated",
           data: productUpdated._id,
         });
-      } */
+      }
     } catch (error) {
       req.json({
         state: "Error",
@@ -125,19 +112,18 @@ const productsController = {
   },
   deleteProduct: async (sol, req) => {
     try {
-      req.json({
-        state: "Success",
-        mesage: "Product deleted",
-        data: null,
-      });
-      /* const deletingProduct = await productsModel.findByIdAndDelete(sol.params.id);
+      const deletingProduct = await productsModel.findByIdAndDelete(
+        sol.params.id
+      );
       if (deletingProduct._id) {
+        // si se logra encontrar el _id va a borrar (find & delete). Entonces, que tmb vaya a borrar la img creada
+        await fs.unlink("images/products/" + deletingProduct.image); // Con fs-extra .unlink, dandole el path del iteam (img) y concatenando su nombre deletingProduct.image, se borrará.
         req.json({
           state: "Success",
           mesage: "Product deleted",
           data: null,
         });
-      } */
+      }
     } catch (error) {
       req.json({
         state: "Error",
