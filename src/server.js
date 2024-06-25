@@ -5,6 +5,7 @@ import morgan from "morgan";
 import usersRouter from "./routers/usersRouter.js";
 import loginRouter from "./routers/loginRouter.js";
 import productsRouter from "./routers/productsRouter.js"; // Todos fuera de corchetes porque está exportado por default
+import shopRouter from "./routers/shopRouter.js";
 
 const server = express();
 
@@ -14,6 +15,7 @@ server.use(morgan("dev"));
 server.use("/users", usersRouter);
 server.use("/login", loginRouter);
 server.use("/products", productsRouter);
+server.use("/shop", shopRouter);
 server.use("/images/products", express.static(path.resolve("images/products")));
 
 server.get("/", (sol, res) => {
