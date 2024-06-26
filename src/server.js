@@ -16,7 +16,12 @@ server.use("/users", usersRouter);
 server.use("/login", loginRouter);
 server.use("/products", productsRouter);
 server.use("/shop", shopRouter);
-server.use("/images/products", express.static(path.resolve("images/products")));
+
+server.use("/images/projects", express.static(path.resolve("images/projects")));
+server.use(
+  "/images/creations",
+  express.static(path.resolve("images/creations"))
+);
 
 server.get("/", (sol, res) => {
   res.status(404).send("Not found, try /login on the URL");

@@ -6,7 +6,7 @@ const productsController = {
   createProduct: async (sol, req) => {
     try {
       const storage = multer.diskStorage({
-        destination: "images/products",
+        destination: "images/creations",
         filename: (req, file, cb) => {
           cb(null, file.originalname);
         },
@@ -117,7 +117,7 @@ const productsController = {
       );
       if (deletingProduct._id) {
         // si se logra encontrar el _id va a borrar (find & delete). Entonces, que tmb vaya a borrar la img creada
-        await fs.unlink("images/products/" + deletingProduct.image); // Con fs-extra .unlink, dandole el path del iteam (img) y concatenando su nombre deletingProduct.image, se borrará.
+        await fs.unlink("images/creations/" + deletingProduct.image); // Con fs-extra .unlink, dandole el path del iteam (img) y concatenando su nombre deletingProduct.image, se borrará.
         req.json({
           state: "Success",
           mesage: "Product deleted",

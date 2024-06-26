@@ -5,9 +5,9 @@ const shopSchema = new Schema(
     place: {
       facility: { type: String, required: true },
       area: {
-        hight: { type: Number, required: false },
-        width: { type: Number, required: false },
-        depth: { type: Number, required: false },
+        hight: { type: String, required: false },
+        width: { type: String, required: false },
+        depth: { type: String, required: false },
       },
     },
     redesign: { type: Boolean, required: true },

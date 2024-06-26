@@ -5,7 +5,7 @@ const shopController = {
   createShop: async (sol, req) => {
     try {
       const storage = multer.diskStorage({
-        destination: "images/shop",
+        destination: "images/projects",
         filename: (req, file, cb) => {
           cb(null, file.originalname);
         },
@@ -118,6 +118,7 @@ const shopController = {
     try {
       const deletingShop = await shopModel.findByIdAndDelete(sol.params.id);
       if (deletingShop._id) {
+        await fs.unlink("images/projects/" + deletingProduct.image);
         req.json({
           state: "Success",
           mesage: "Shop deleted",
