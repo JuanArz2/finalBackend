@@ -18,7 +18,7 @@ const productsController = {
         if (error) {
           req.json({
             state: "Error",
-            mesage: "Error loading image",
+            mesage: "Error uploading image",
             data: null,
           });
         } else {

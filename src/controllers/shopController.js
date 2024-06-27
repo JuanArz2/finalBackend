@@ -1,4 +1,5 @@
 import multer from "multer";
+import fs from "fs-extra";
 import shopModel from "../models/shopModel.js";
 
 const shopController = {
@@ -118,10 +119,10 @@ const shopController = {
     try {
       const deletingShop = await shopModel.findByIdAndDelete(sol.params.id);
       if (deletingShop._id) {
-        await fs.unlink("images/projects/" + deletingProduct.image);
+        await fs.unlink("images/projects/" + deletingShop.image);
         req.json({
           state: "Success",
-          mesage: "Shop deleted",
+          mesage: "Project deleted",
           data: null,
         });
       }
