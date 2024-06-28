@@ -27,7 +27,7 @@ const shopController = {
             place: {
               facility: sol.body.facility,
               area: {
-                hight: sol.body.hight,
+                height: sol.body.height,
                 width: sol.body.width,
                 depth: sol.body.depth,
               },

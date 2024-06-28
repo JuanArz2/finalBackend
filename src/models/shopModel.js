@@ -10,7 +10,7 @@ const shopSchema = new Schema(
         depth: { type: String, required: false },
       },
     },
-    redesign: { type: Boolean, required: true },
+    redesign: { type: Boolean, required: false },
     budget: { type: Number, required: false },
     date: { type: Date, required: false },
     image: { type: String, required: true },
